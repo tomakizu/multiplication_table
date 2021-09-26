@@ -21,7 +21,7 @@ if (isset($_POST['logout'])) {
 </head>
 
 <body>
-    <p>Hi, <?= $_SESSION['user']['name'] ?>!</p>
+    <h1>Hi, <?= $_SESSION['user']['name'] ?>!</h1>
     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
         <input type="submit" name="logout" value="Logout" />
     </form>
