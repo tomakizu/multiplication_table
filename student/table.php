@@ -5,11 +5,8 @@ if (!isset($_SESSION['user'])) {
 } elseif ($_SESSION['user']['type'] != 'student') {
     header('Location: ../');
 }
-
-if (isset($_POST['logout'])) {
-    header('Location: ../logout.php');
-}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,15 +18,21 @@ if (isset($_POST['logout'])) {
 </head>
 
 <body>
-    <h1>Hi, <?= $_SESSION['user']['name'] ?>!</h1>
+    <h1>Multiplication Table</h1>
+    <table>
+        <tr>
+            <?php for ($i = 1; $i <= 10; $i++) { ?>
+                <td>
+                    <?php for ($j = 1; $j <= 10; $j++) { ?>
+                        <p><?= $i ?> * <?= $j ?> = <?= $i * $j ?></p>
+                    <?php } ?>
+                </td>
+            <?php } ?>
+        </tr>
+    </table>
     <p>
-        <a href="table.php"><button type="button">Table</button></a>
-        <a href="tips.php"><button type="button">Tips</button></a>
-        <a href="quiz.php"><button type="button">Quiz</button></a>
+        <a href="index.php"><button type="button">Back</button></a>
     </p>
-    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-        <input type="submit" name="logout" value="Logout" />
-    </form>
 </body>
 
 </html>
