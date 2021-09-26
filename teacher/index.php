@@ -1,0 +1,1 @@
+<?php echo 'This is ' . $_SERVER['PHP_SELF']; ?>
