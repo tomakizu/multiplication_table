@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (isset($_SESSION['user'])) {
+    header('Location: ' . $_SESSION['user']['type']);
+}
+
 require('common/conn.php');
 
 $username = isset($_POST['username']) ? $_POST['username'] : '';
@@ -11,7 +16,7 @@ $redirect_url = '';
 if (isset($_POST['submit'])) {
     $hash = hash('md5', $password);
 
-    $sql = $conn->prepare('SELECT username, password, type_id, type_name FROM user INNER JOIN user_type ON user_type.id=user.type_id WHERE username=? AND password=?');
+    $sql = $conn->prepare('SELECT *, type_name FROM user INNER JOIN user_type ON user_type.id=user.type_id WHERE username=? AND password=?');
     $sql->bind_param('ss', $username, $hash);
     $sql->execute();
 
@@ -19,6 +24,10 @@ if (isset($_POST['submit'])) {
     if ($record = $result->fetch_assoc()) {
         $redirect = true;
         $redirect_url = $record['type_name'];
+
+        $_SESSION['user']['id'] = $record['id'];
+        $_SESSION['user']['name'] = $record['name'];
+        $_SESSION['user']['type'] = $record['type_name'];
     } else $alert_msg .= 'Invalid Login Information!';
 }
 ?>
@@ -30,7 +39,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Online Multiplication Table</title>
 </head>
 
 <body>
