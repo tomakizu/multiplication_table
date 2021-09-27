@@ -10,7 +10,19 @@ $redirect = false;
 
 require('../common/conn.php');
 
-if (isSet($_POST['submit'])) {
+if (isset($_POST['submit'])) {
+    $sql = $conn->prepare('INSERT INTO quiz_result (user_id) VALUES (?)');
+    $sql->bind_param('i', $_SESSION['user']['id']);
+
+    $sql->execute();
+    $quiz_id = $conn->insert_id;
+
+    for ($i = 0; $i < count($_POST['response']); $i++) {
+        $marks = $_POST['response'][$i] == $_SESSION['question'][$i]['answer'] ? 1 : 0;
+        $sql = $conn->prepare('INSERT INTO quiz_details (quiz_id, question_id, response, marks) VALUES (?, ?, ?, ?)');
+        $sql->bind_param('iiii', $quiz_id, $_SESSION['question'][$i]['question_id'], $_POST['response'][$i], $marks);
+        $sql->execute();
+    }
     unset($_SESSION['question']);
     $redirect = true;
 } elseif (!isset($_SESSION['question'])) {
@@ -28,9 +40,10 @@ if (isSet($_POST['submit'])) {
         $result = $sql->get_result();
         if ($record = $result->fetch_assoc()) {
             $questions[] = array(
-                'number1' => $record['number1'],
-                'number2' => $record['number2'],
-                'answer'  => $record['number1'] * $record['number2']
+                'question_id' => $record['id'],
+                'number1'     => $record['number1'],
+                'number2'     => $record['number2'],
+                'answer'      => $record['number1'] * $record['number2']
             );
         }
     }
@@ -52,7 +65,7 @@ if (isSet($_POST['submit'])) {
     <h1>Quiz</h1>
     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
         <?php foreach ($_SESSION['question'] as $question) { ?>
-            <p><?= $question['number1'] ?> * <?= $question['number2'] ?> = <input type="number" name="response[]" /></p>
+            <p><?= $question['number1'] ?> * <?= $question['number2'] ?> = <input type="number" name="response[]" style="width: 50px;" required /></p>
         <?php } ?>
 
         <input type="submit" name="submit" value="Submit" />
