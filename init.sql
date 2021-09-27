@@ -82,7 +82,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `multiplication_table`.`quiz_result` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
-  `marks` INT NOT NULL,
   `datetime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   CONSTRAINT `quiz_result_fk`
