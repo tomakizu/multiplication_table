@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION['user'])) {
     header('Location: ../');
-} elseif ($_SESSION['user']['type'] != 'student') {
+} elseif ($_SESSION['user']['type'] != 'teacher') {
     header('Location: ../');
 }
 require('../lang.php');

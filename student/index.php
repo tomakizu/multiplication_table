@@ -6,6 +6,11 @@ if (!isset($_SESSION['user'])) {
     header('Location: ../');
 }
 
+require('../lang.php');
+if (!isSet($_SESSION['lang'])) {
+    $_SESSION['lang'] = 'en';
+}
+
 if (isset($_POST['logout'])) {
     header('Location: ../logout.php');
 }
@@ -14,22 +19,24 @@ if (isset($_POST['logout'])) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Multiplication Table - Student Portal</title>
+    <?php include('head.php'); ?>
 </head>
 
 <body>
-    <h1>Hi, <?= $_SESSION['user']['name'] ?>!</h1>
-    <p>
-        <a href="table.php"><button type="button">Table</button></a>
-        <a href="quiz.php"><button type="button">Quiz</button></a>
-        <a href="result.php"><button type="button">Result</button></a>
-    </p>
-    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-        <input type="submit" name="logout" value="Logout" />
-    </form>
+    <?php include('nav.php'); ?>
+    <div class="container">
+        <div class="text-center mt-5">
+            <h1><?= $language_string[$_SESSION['lang']]['greeting'] ?>, <?= $_SESSION['user']['name'] ?>!</h1>
+            <p>
+                <a href="table.php"><button type="button"><?= $language_string[$_SESSION['lang']]['show_m_table'] ?></button></a>
+                <a href="quiz.php"><button type="button"><?= $language_string[$_SESSION['lang']]['take_a_quiz'] ?></button></a>
+                <a href="result.php"><button type="button"><?= $language_string[$_SESSION['lang']]['view_history'] ?></button></a>
+            </p>
+        </div>
+
+    </div>
 </body>
+
+<?php include('../common/js.php'); ?>
 
 </html>
