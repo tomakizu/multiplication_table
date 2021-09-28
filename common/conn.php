@@ -1,6 +1,6 @@
 <?php 
-$server   = 'localhost';
-$username = 'root';
+$server   = '';
+$username = '';
 $password = '';
 $database = 'multiplication_table';
 
