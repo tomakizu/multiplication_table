@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION['user'])) {
     header('Location: ../');
-} elseif ($_SESSION['user']['type'] != 'student') {
+} elseif ($_SESSION['user']['type'] != 'teacher') {
     header('Location: ../');
 }
 
@@ -15,8 +15,8 @@ if (!isset($_GET['id'])) {
 $submission_time = '';
 $total_score = 0;
 
-$sql = $conn->prepare('SELECT * FROM quiz_details INNER JOIN quiz_result ON quiz_result.id=quiz_details.quiz_id INNER JOIN question ON question.id=quiz_details.question_id WHERE quiz_id=? AND user_id=?');
-$sql->bind_param('ii', $_GET['id'], $_SESSION['user']['id']);
+$sql = $conn->prepare('SELECT * FROM quiz_details INNER JOIN quiz_result ON quiz_result.id=quiz_details.quiz_id INNER JOIN question ON question.id=quiz_details.question_id INNER JOIN parent_relationship ON parent_relationship.child_id = quiz_result.user_id WHERE quiz_id=?');
+$sql->bind_param('i', $_GET['id']);
 $sql->execute();
 $result = $sql->get_result();
 ?>
@@ -36,7 +36,7 @@ $result = $sql->get_result();
                 <tr class="table-secondary">
                     <th scope="col"><?= $language_string[$_SESSION['lang']]['question'] ?></th>
                     <th scope="col"><?= $language_string[$_SESSION['lang']]['answer'] ?></th>
-                    <th scope="col"><?= $language_string[$_SESSION['lang']]['your_response'] ?></th>
+                    <th scope="col"><?= $language_string[$_SESSION['lang']]['student_response'] ?></th>
                     <th scope="col"><?= $language_string[$_SESSION['lang']]['score'] ?></th>
                 </tr>
                 <?php while ($record = $result->fetch_assoc()) { ?>

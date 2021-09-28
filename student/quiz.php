@@ -8,6 +8,7 @@ if (!isset($_SESSION['user'])) {
 
 $redirect = false;
 
+require('../lang.php');
 require('../common/conn.php');
 
 if (isset($_POST['submit'])) {
@@ -55,22 +56,32 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Multiplication Table - Student Portal</title>
+    <?php include('head.php'); ?>
 </head>
 
 <body>
-    <h1>Quiz</h1>
-    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-        <?php foreach ($_SESSION['question'] as $question) { ?>
-            <p><?= $question['number1'] ?> * <?= $question['number2'] ?> = <input type="number" name="response[]" style="width: 50px;" required /></p>
-        <?php } ?>
+    <?php include('nav.php'); ?>
+    <div class="container">
+        <div class="text-center mt-5">
+            <h1><?= $language_string[$_SESSION['lang']]['quiz'] ?></h1>
+            <p><?= $language_string[$_SESSION['lang']]['quiz_instruction'] ?></p>
+            <div class="container">
+                <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+                    <div class="row gy-5 row-cols-2 align-self-center">
+                        <?php foreach ($_SESSION['question'] as $question) { ?>
+                            <div class="col"><?= $question['number1'] ?> * <?= $question['number2'] ?> = <input type="number" name="response[]" style="width: 50px;" required /></div>
+                        <?php } ?>
+                    </div>
+                    <p><input type="submit" name="submit" value="<?= $language_string[$_SESSION['lang']]['submit'] ?>" /></p>
+                </form>
+            </div>
+        </div>
 
-        <input type="submit" name="submit" value="Submit" />
-    </form>
+    </div>
 </body>
+
+<?php include('../common/js.php'); ?>
+
 <script type="text/javascript">
     <?php
     if ($redirect) echo "location.replace('index.php')";
