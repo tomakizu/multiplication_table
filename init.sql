@@ -159,9 +159,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `multiplication_table`;
-INSERT INTO `multiplication_table`.`user` (`id`, `name`, `username`, `password`, `type_id`, `class_id`, `datetime_created`, `datetime_deleted`) VALUES (DEFAULT, 'Student', 'student', 'e10adc3949ba59abbe56e057f20f883e', 1, NULL, DEFAULT, NULL);
-INSERT INTO `multiplication_table`.`user` (`id`, `name`, `username`, `password`, `type_id`, `class_id`, `datetime_created`, `datetime_deleted`) VALUES (DEFAULT, 'Student\'s Parent', 'parent', 'e10adc3949ba59abbe56e057f20f883e', 2, NULL, DEFAULT, NULL);
-INSERT INTO `multiplication_table`.`user` (`id`, `name`, `username`, `password`, `type_id`, `class_id`, `datetime_created`, `datetime_deleted`) VALUES (DEFAULT, 'Teacher', 'teacher', 'e10adc3949ba59abbe56e057f20f883e', 3, NULL, DEFAULT, NULL);
+INSERT INTO `multiplication_table`.`user` (`id`, `name`, `username`, `password`, `type_id`, `class_id`, `datetime_created`, `datetime_deleted`) VALUES (DEFAULT, 'Chan Tai Man', 'student', 'e10adc3949ba59abbe56e057f20f883e', 1, 1, DEFAULT, NULL);
+INSERT INTO `multiplication_table`.`user` (`id`, `name`, `username`, `password`, `type_id`, `class_id`, `datetime_created`, `datetime_deleted`) VALUES (DEFAULT, 'Chan Tai Man', 'parent', 'e10adc3949ba59abbe56e057f20f883e', 2, NULL, DEFAULT, NULL);
+INSERT INTO `multiplication_table`.`user` (`id`, `name`, `username`, `password`, `type_id`, `class_id`, `datetime_created`, `datetime_deleted`) VALUES (DEFAULT, 'Mr. Ho', 'teacher', 'e10adc3949ba59abbe56e057f20f883e', 3, NULL, DEFAULT, NULL);
+INSERT INTO `multiplication_table`.`user` (`id`, `name`, `username`, `password`, `type_id`, `class_id`, `datetime_created`, `datetime_deleted`) VALUES (DEFAULT, 'Chan Siu Man', 'student', 'e10adc3949ba59abbe56e057f20f883e', 1, 2, DEFAULT, NULL);
 
 COMMIT;
 
