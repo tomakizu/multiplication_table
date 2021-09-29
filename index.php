@@ -39,17 +39,10 @@ if (isset($_POST['submit'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
     <title>Learning Multiplication 快樂學乘法</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 
     <!-- Bootstrap core CSS -->
     <link href="common/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <meta name="theme-color" content="#7952b3">
-
 
     <style>
         html,
@@ -62,7 +55,7 @@ if (isset($_POST['submit'])) {
             align-items: center;
             padding-top: 40px;
             padding-bottom: 40px;
-            background-color: #f5f5f5;
+            background-color: #e3e3e3;
         }
 
         .form-signin {
@@ -112,15 +105,21 @@ if (isset($_POST['submit'])) {
 
     <main class="form-signin">
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-            <h1 class="h3 mb-3 fw-normal">Learning Multiplication 快樂學乘法</h1>
+            <h3 class="fw-normal">Learning Multiplication</h3>
+            <h3 class="fw-normal">快樂學乘法</h3>
 
-            <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username">
-                <label for="floatingInput">Username / 用戶名稱</label>
+            <div>
+                <p>Username / 用戶名稱</p>
             </div>
-            <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
-                <label for="floatingPassword">Password / 密碼</label>
+            <div>
+                <input type="text" class="form-control" name="username">
+            </div>
+            <br>
+            <div>
+                <p>Password / 密碼</p>
+            </div>
+            <div>
+                <input type="password" class="form-control" name="password">
             </div>
             <div class="checkbox mb-3">
                 <label for="language">Language / 語言:</label>
