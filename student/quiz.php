@@ -7,6 +7,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 $redirect = false;
+$quiz_id = 0;
 
 require('../lang.php');
 require('../common/conn.php');
@@ -84,7 +85,7 @@ if (isset($_POST['submit'])) {
 
 <script type="text/javascript">
     <?php
-    if ($redirect) echo "location.replace('index.php')";
+    if ($redirect) echo "location.replace('result_details.php?id=$quiz_id')";
     ?>
 </script>
 
